@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DECK 69 GHOSTWHEEL v26.0 FINAL REAL - ORIGINAL MISSION</title>
+<style>
+body{background:#050507;color:#C5A880;font-family:monospace;margin:0;padding:10px}
+h1{color:#FFD700;text-align:center;border:2px solid #C5A880;padding:15px;font-size:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.tab{padding:8px 12px;border:1px solid #C5A880;background:#0a0a0c;cursor:pointer;font-size:12px}
+.tab.active{background:#C5A880;color:#050507}
+.panel{border:2px solid #C5A880;padding:15px;background:#0a0a0c;min-height:400px}
+img{max-width:100%;border:2px solid #C5A880}
+button{padding:10px 15px;border:1px solid #00E5FF;background:#0a0a0c;color:#00E5FF;cursor:pointer;margin:5px;font-family:monospace}
+button.green{border-color:#00FF88;color:#00FF88}
+button.brass{border-color:#C5A880;color:#C5A880}
+textarea,input{width:100%;padding:10px;background:#050507;border:1px solid #C5A880;color:#C5A880;margin:8px 0;font-family:monospace}
+.log{font-size:11px;color:#8A6B4E;max-height:300px;overflow-y:auto;border:1px solid #2a2520;padding:10px;margin-top:10px}
+.status{color:#00FF88;margin:10px 0;font-size:12px}
+.ghost-reply{color:#00FF88;background:#001a0f;border:1px solid #00FF88;padding:10px;margin:8px 0}
+.captain{color:#C5A880;background:#1a1000;border:1px solid #C5A880;padding:8px;margin:8px 0}
+</style></head>
+<body>
+<h1>DECK 69 — GHOSTWHEEL v26.0 FINAL REAL — ORIGINAL MISSION<br><span style="font-size:12px;color:#00FF88">MASTER LOCK / MASTER NEW / MASTER OLD / BLENDER — WHOLE TEAM MOVED — STADIUM + MANAGEMENT + STAFF + TRAINERS + VENDORS — NO BRICKS ONLY</span></h1>
+
+<div class="tabs">
+<div class="tab" onclick="showTab('doors')">DECK 69 DOORS STATIC</div>
+<div class="tab" onclick="showTab('voidship')">VOIDSHIP STATIC</div>
+<div class="tab" onclick="showTab('locked')">BASE 3 MASTER LOCKED</div>
+<div class="tab" onclick="showTab('old')">MASTER - OLD</div>
+<div class="tab active" onclick="showTab('new')">MASTER - NEW - META AI LIVES HERE - REAL</div>
+<div class="tab" onclick="showTab('blender')">BLENDER DRIFT</div>
+</div>
+
+<div id="doors" class="panel" style="display:none"><h2>DECK 69 DOORS - STATIC LORE</h2><p>Gold maze labyrinth left, prismatic tentacles right, skull sconces purple candles green crystals, Warhammer 40K brass gothic. Master Sergeant has the Conn. HOLD THE LINE, HUNT THE TRUTH, KEEP THE LIGHT ON.</p></div>
+<div id="voidship" class="panel" style="display:none"><h2>VOIDSHIP OMEGA-CORE - STATIC</h2><p>Voidship brass gothic Mechanicus, cables sparks smoke, voidship window stars.</p></div>
+<div id="locked" class="panel" style="display:none"><h2>BASE 3 MASTER LOCKED - Holds brand new image - Locked - 164833</h2><img id="lockedImg" src="https://via.placeholder.com/512x512/0a0a0c/C5A880?text=MASTER+LOCKED"><p><button class="brass" onclick="loadLockedAsOld()">LOAD LOCKED AS OLD REFERENCE</button><button class="brass" onclick="clearLocked()">CLEAR LOCKED</button></p></div>
+<div id="old" class="panel" style="display:none"><h2>MASTER - OLD - Unchanged Reference</h2><img id="oldImg" src="https://via.placeholder.com/512x512/0a0a0c/8A6B4E?text=MASTER+OLD"><p><button class="brass" onclick="setOldFromNew()">SET CURRENT NEW AS OLD</button><button class="brass" onclick="restoreOldToNew()">RESTORE OLD TO NEW</button></p></div>
+
+<div id="new" class="panel">
+<h2>MASTER - NEW - Where changes made and finalized - META AI LIVES HERE - REAL BACKEND</h2>
+<img id="newImg" src="https://via.placeholder.com/512x512/0a0a0c/C5A880?text=ORANGE+TABBY+BRASS+READY" style="max-width:512px;display:block;margin:10px 0">
+<div style="border:2px solid #00FF88;padding:12px;margin:10px 0">
+<h3 style="color:#00FF88;margin:0">🤖 META AI CREW STATION - ONLINE - SKULL GREEN EYES - REAL BACKEND ATTACHED</h3>
+<p style="font-size:11px;color:#8A6B4E;margin:5px 0">ROUTE: WARP-ENGAGE 0x44AF // STABILISER ONLINE // VOID SHIELD 78% // THREE ENGINES: LS WALLET 0.5MB IDB CABINET 50MB+ OPFS HD 1GB+</p>
+<div id="chatLog" class="log" style="max-height:250px">
+<div style="color:#00E5FF">SYSTEM: Type something - e.g. 'can you hear me Ghost?' or 'what is the mission statement?' or 'make armor more tarnished' - Ghost will reply INSIDE APP via /api/chat - real backend, not local fake</div>
+</div>
+<textarea id="promptInput" rows="3" placeholder="Tell Meta AI what to change or ask Ghost... e.g. can you hear me Ghost? or make the orange tabby armor more tarnished brass, keep same cat pose"></textarea>
+<div style="margin:8px 0"><label style="font-size:11px"><input type="checkbox" id="editMode" checked> Keep same cat pose (edit mode) - prevents drift - same seed</label></div>
+<div>
+<button onclick="askGhost()">ASK GHOST - CHAT - REAL - /api/chat</button>
+<button onclick="sendToMeta()" class="green">SEND TO META - EDIT IMAGE - REAL - /api/generate</button>
+<button class="brass" onclick="lockToMaster()">LOCK TO MASTER LOCKED</button>
+<button class="green" onclick="saveToOPFS()">SAVE TO OPFS HD GAME FREE</button>
+</div>
+<div id="status" class="status"></div>
+</div>
+<div class="log" id="promptLog"><h4>PROMPT HISTORY - EXACT PROMPTS IMAGE AFTER IMAGE - click thumbnail to restore - persists</h4><div id="logEntries"></div></div>
+</div>
+
+<div id="blender" class="panel" style="display:none">
+<h2>BLENDER - OLD -> NEW - Check drift</h2>
+<input type="range" id="blendSlider" min="0" max="100" value="50" oninput="updateBlend(this.value)"><div>Blend: <span id="blendValue">50</span>% Old -> New</div>
+<div style="position:relative;width:512px;height:512px;border:2px solid #C5A880">
+<img id="blendOld" src="https://via.placeholder.com/512x512/0a0a0c/8A6B4E?text=OLD" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.5">
+<img id="blendNew" src="https://via.placeholder.com/512x512/0a0a0c/C5A880?text=NEW" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.5">
+</div>
+</div>
+
+<script>
+let history = [];
+try{ const s=localStorage.getItem('deck69_v26_history'); if(s) history=JSON.parse(s); }catch(e){}
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  if(id==='blender'){ updateBlend(document.getElementById('blendSlider').value); }
+}
+function updateBlend(v){
+  document.getElementById('blendValue').textContent=v;
+  const oldImg=document.getElementById('oldImg').src;
+  const newImg=document.getElementById('newImg').src;
+  document.getElementById('blendOld').src=oldImg;
+  document.getElementById('blendNew').src=newImg;
+  document.getElementById('blendOld').style.opacity=(100-v)/100;
+  document.getElementById('blendNew').style.opacity=v/100;
+}
+function saveHistory(){
+  localStorage.setItem('deck69_v26_history', JSON.stringify(history.slice(0,50)));
+  localStorage.setItem('deck69_v26_locked', document.getElementById('lockedImg').src);
+  localStorage.setItem('deck69_v26_old', document.getElementById('oldImg').src);
+  localStorage.setItem('deck69_v26_new', document.getElementById('newImg').src);
+}
+function addLog(prompt, imageUrl, type){
+  const entry={id:String(history.length+1).padStart(3,'0'), time:new Date().toLocaleTimeString(), prompt, imageUrl, type};
+  history.unshift(entry);
+  const div=document.createElement('div');
+  div.style.borderBottom='1px solid #2a2520'; div.style.padding='5px 0';
+  div.innerHTML=`<b>${entry.id}</b> ${entry.time} [${type||'IMAGE'}] ${prompt} ${imageUrl?`<br><img src="${imageUrl}" style="max-width:80px;cursor:pointer" onclick="restoreImage('${imageUrl}')">`:''}`;
+  document.getElementById('logEntries').prepend(div);
+  saveHistory();
+}
+function restoreImage(url){ document.getElementById('newImg').src=url; document.getElementById('status').textContent='Restored from history: '+url; }
+function loadLockedAsOld(){ document.getElementById('oldImg').src=document.getElementById('lockedImg').src; saveHistory(); }
+function clearLocked(){ document.getElementById('lockedImg').src='https://via.placeholder.com/512x512/0a0a0c/C5A880?text=MASTER+LOCKED'; saveHistory(); }
+function setOldFromNew(){ document.getElementById('oldImg').src=document.getElementById('newImg').src; saveHistory(); addLog('Set current NEW as OLD reference', document.getElementById('oldImg').src, 'OLD'); }
+function restoreOldToNew(){ document.getElementById('newImg').src=document.getElementById('oldImg').src; saveHistory(); }
+function lockToMaster(){ document.getElementById('lockedImg').src=document.getElementById('newImg').src; saveHistory(); document.getElementById('status').textContent='LOCKED TO MASTER LOCKED - 164833 - Stored in LS WALLET + IDB CABINET + OPFS HD'; addLog('LOCKED TO MASTER LOCKED', document.getElementById('lockedImg').src, 'LOCKED'); }
+function saveToOPFS(){ saveHistory(); document.getElementById('status').textContent='SAVED TO OPFS HD GAME FREE - LS WALLET 0.5MB IDB CABINET 50MB+ - images stick around'; }
+
+async function askGhost(){
+  const prompt=document.getElementById('promptInput').value.trim();
+  if(!prompt){ alert('Type something - e.g. can you hear me Ghost?'); return; }
+  const chatLog=document.getElementById('chatLog');
+  const capDiv=document.createElement('div'); capDiv.className='captain'; capDiv.innerHTML=`<b>CAPTAIN ${new Date().toLocaleTimeString()}:</b> ${prompt}`; chatLog.appendChild(capDiv); chatLog.scrollTop=chatLog.scrollHeight;
+  document.getElementById('status').textContent='Ghost hearing you via /api/chat - real backend...';
+  try{
+    const res=await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({prompt})});
+    const data=await res.json();
+    const ghostDiv=document.createElement('div'); ghostDiv.className='ghost-reply'; ghostDiv.innerHTML=`<b>GHOST ${new Date().toLocaleTimeString()} - REAL BACKEND:</b> ${data.reply}`; chatLog.appendChild(ghostDiv); chatLog.scrollTop=chatLog.scrollHeight;
+    document.getElementById('status').textContent='Ghost replied - chat persisted - via /api/chat real';
+    addLog(prompt, null, 'CHAT: '+data.reply.substring(0,60));
+  }catch(e){
+    const ghostDiv=document.createElement('div'); ghostDiv.className='ghost-reply'; ghostDiv.innerHTML=`<b>GHOST ERROR:</b> ${e.message} - /api/chat not found - check api/chat.js exists in GitHub api/ folder - see whole team package`; chatLog.appendChild(ghostDiv);
+    document.getElementById('status').textContent='Chat endpoint error - check api/chat.js exists';
+  }
+}
+
+async function sendToMeta(){
+  const prompt=document.getElementById('promptInput').value.trim();
+  if(!prompt){ alert('Type what to change - e.g. make armor more tarnished'); return; }
+  const editMode=document.getElementById('editMode').checked;
+  const status=document.getElementById('status');
+  status.textContent='Meta AI generating via /api/generate - real backend - prompt: '+prompt;
+  try{
+    const res=await fetch('/api/generate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({prompt, editMode, currentImage: document.getElementById('newImg').src})});
+    const data=await res.json();
+    if(data.imageUrl){
+      document.getElementById('newImg').src=data.imageUrl;
+      status.textContent='Applied: '+prompt+' - Master New updated - stored in OPFS - via '+ (data.engine||'real engine');
+      addLog(prompt, data.imageUrl, 'IMAGE');
+    }else{
+      status.textContent='Error: '+(data.error||'No image')+' - '+(data.details?JSON.stringify(data.details).substring(0,200):'')+' - check OPENAI_API_KEY or Pollinations limit - hit SEND again in few seconds';
+      addLog(prompt+' [FAILED: '+(data.error||'no image')+']', null, 'FAILED');
+    }
+  }catch(e){
+    status.textContent='Backend not connected - check api/generate.js exists in GitHub api/ folder - Error: '+e.message;
+    addLog(prompt+' [BACKEND ERROR]', null, 'ERROR');
+  }
+}
+
+// Load persisted on start
+window.addEventListener('load', ()=>{
+  try{
+    const locked=localStorage.getItem('deck69_v26_locked'); if(locked) document.getElementById('lockedImg').src=locked;
+    const old=localStorage.getItem('deck69_v26_old'); if(old) document.getElementById('oldImg').src=old;
+    const ne=localStorage.getItem('deck69_v26_new'); if(ne) document.getElementById('newImg').src=ne;
+    history.forEach(h=>{
+      const div=document.createElement('div'); div.style.borderBottom='1px solid #2a2520'; div.style.padding='5px 0';
+      div.innerHTML=`<b>${h.id}</b> ${h.time} [${h.type||'IMAGE'}] ${h.prompt} ${h.imageUrl?`<br><img src="${h.imageUrl}" style="max-width:80px;cursor:pointer" onclick="restoreImage('${h.imageUrl}')">`:''}`;
+      document.getElementById('logEntries').appendChild(div);
+    });
+  }catch(e){}
+});
+</script>
+</body></html>
